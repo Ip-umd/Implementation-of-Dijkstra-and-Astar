@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Apr 27 2019
+Created on Wed May  1 20:51:55 2019
 
 @author: ishan
 """
@@ -71,13 +71,17 @@ for i in range(150):
         oy.append(i)
         obstacle[249][i] = 1
 
-
+# Taking the user inputs
+sx = int(input('Enter the x-coordinate of Start point: '))        
+sy = int(input('Enter the y-coordinate of Start point: '))        
+gx = int(input('Enter the x-coordinate of Goal point: '))        
+gy = int(input('Enter the y-coordinate of Goal point: '))        
+start_time = time.time()
 #plotting the obstacle map
 plt.plot(ox,oy,".k")
 plt.ylim((0,150))
 plt.xlim((0,250))
 
-start_time = time.time()
 
 def motion_model():
     steps = [[1,0,1],
@@ -139,7 +143,10 @@ def dijkistra(start,goal, obstacle):
                              current_node[1][1] + new_position[1])
             node_position_cost = current_node[0] + new_position[2]
             
-
+# =============================================================================
+#             node_heuristic_cost = 100 * (math.sqrt((goal_node[1][0] - node_position[0] )**2 + (goal_node[1][1] - node_position[1] )**2))
+#             node_position_cost = node_position_cost + node_heuristic_cost
+# =============================================================================
             
             node_parent = current_node[1]
             
@@ -160,10 +167,8 @@ def dijkistra(start,goal, obstacle):
             heapq.heappush(open_list,(new_node))
     
 # =============================================================================
-#start = (sx, sy)
-start = (10, 10)
-#goal = (gx, gy)
-goal = (50,50)
+start = (sx, sy)
+goal = (gx, gy)
 
 if start in zip(ox,oy):
     print('Start node is in obstacle space.Please select another node.')
@@ -171,7 +176,8 @@ elif goal in zip(ox,oy) :
     print('Goal node is in obstacle space .Please select another node.')
 else:
     path = dijkistra(start,goal, obstacle)   
-   
+     
+     
 end_time = time.time()
 print('time elapsed:',abs(end_time - start_time))  
 print(path)  
