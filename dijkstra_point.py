@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed May  1 20:51:55 2019
+Created on Thu May  9 02:39:24 2019
 
 @author: ishan
 """
-
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -143,10 +142,6 @@ def dijkistra(start,goal, obstacle):
                              current_node[1][1] + new_position[1])
             node_position_cost = current_node[0] + new_position[2]
             
-# =============================================================================
-#             node_heuristic_cost = 100 * (math.sqrt((goal_node[1][0] - node_position[0] )**2 + (goal_node[1][1] - node_position[1] )**2))
-#             node_position_cost = node_position_cost + node_heuristic_cost
-# =============================================================================
             
             node_parent = current_node[1]
             
@@ -176,8 +171,17 @@ elif goal in zip(ox,oy) :
     print('Goal node is in obstacle space .Please select another node.')
 else:
     path = dijkistra(start,goal, obstacle)   
-     
-     
-end_time = time.time()
-print('time elapsed:',abs(end_time - start_time))  
-print(path)  
+    if path == None:
+        print('Goal node is in obstacle space.Please select another node.')    
+    else:    
+        pathx = [path[i][0] for i in range(len(path))]
+        pathy = [path[i][1] for i in range(len(path))]
+        
+        plt.plot(start[0], start[1], "Dm")
+        plt.plot(goal[0], goal[1], "Dg")        
+        plt.plot(explore_x,explore_y, "3c")
+        plt.plot(pathx,pathy,"-r")
+        plt.show()
+        end_time = time.time()
+        print('time elapsed:',abs(end_time - start_time))  
+  
