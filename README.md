@@ -1,10 +1,13 @@
 # Implementation-of-Dijkstra-and-Astar
 
-﻿Files included:
+Files included:
 
 I. Dijkstra_point
+
 II. Dijkstra_rigid
+
 III. A*_point
+
 IV. A*_rigid
 
 Libraries used:
